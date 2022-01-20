@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmobiliaria - {%block titulo%}{%endblock%}</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='menuCSS.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+  <nav id='menu'>
+    <section>
+      <aside>
+        <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+        <ul>
+          <li><a href='/'>Inicio</a></li>
+          <li><a class='dropdown-arrow' href=''>servicios</a>
+            <ul class='sub-menus'>
+              <li><a href='/gestionpredial'>Gestión Predial</a></li>
+              <li><a href='/gestionterritorio'>Gestión del territorio</a></li>
+              <li><a href='/gestioncatastro'>Catastro multipropósito</a></li>
+              <li><a href='/gestionobras'>Obras civiles</a></li>
+              <li><a href='/building'>Inmobiliaria</a></li>
+              <li><a href='/building'>Observatoio Inmobiliario</a></li>
+            </ul>
+
+          <li><a class='dropdown-arrow' href='/verOfertaGrid'>Ofertas</a>
+            <ul class='sub-menus'>
+              <li><a href='/listarOfertas'>Lista</a></li>
+              {% if is_login %}
+                <li><a href='/agregar'>Agregar</a></li>
+              {% endif %} 
+            </ul>
+          </li>
+          <li><a href='/mapa'>Mapa</a></li>
+          <li><a class='dropdown-arrow' href=''>Nosotros</a>
+            <ul class='sub-menus'>
+              <li><a href='/building'>Misión</a></li>
+              <li><a href='/building'>Visión</a></li>
+              <li><a href='/building'>Objetivos</a></li>
+            </ul>
+          </li>
+          <li><a href='/building'>Contactenos</a></li>
+          
+          {% if is_login %}
+            <li><a class='dropdown-arrow' href=''>{{ session['usuario']}} </a>
+              <ul class='sub-menus'>
+                <li> <a href="/perfil/{{ session['usuario']}}"> Perfil</a> </li>                
+                {% if is_login %}
+                  <li><a href='/loginRecov'>Cambiar la clave</a></li>
+                {% endif %} 
+
+                {% if is_admin %}
+                  <li> <a href="/logincrea"> Crear usuario</a> </li>
+                {% endif%}
+                <li> <a href="/logout"> (Salir)</a> </li>
+              </ul> 
+          {% else %}
+            <li><a href='/login'>Login</a></li>
+          {% endif %}
+          
+        </ul>
+      </aside>
+    </section>
+  </nav>
+  <body>
+    <section class="content">
+      {%for message in get_flashed_messages() %}
+      <div>{{message}}</div>
+        {%endfor%}
+    </section>  
+    {% block contenido %}
+    {% endblock %}
+  </body>
+</html>
