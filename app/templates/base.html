@@ -3,10 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inmobiliaria - {%block titulo%}{%endblock%}</title>
+    <title>- {%block titulo%}Soluciones CI{%endblock%}</title>
     <link rel="stylesheet" href="{{url_for('static',filename='menuCSS.css')}}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static',filename='messages.css')}}">
+    <script type="text/javascript" src="{{ url_for('static', filename='/jquery-3.6.0.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+
+<div id='encabezado' class= 'row'>
+  <div class='col-1'>
+  </div>
+  <figure id= 'logo1' class='col-xs-4'>
+    <img src="{{url_for('static', filename='/imagenes/sci.jpeg') }}" alt=""class= "logobase">
+  </figure>
+  <div id= 'texto', class = 'col-xs-4 align-self-center'>
+    <h1 class="titulo">Soluciones Catastrales & Ingeniería S.A.S.</h1>
+  </div>
+  
+
+</div>
 
   <nav id='menu'>
     <section>
@@ -24,41 +41,17 @@
               <li><a href='/building'>Observatoio Inmobiliario</a></li>
             </ul>
 
-          <li><a class='dropdown-arrow' href='/verOfertaGrid'>Ofertas</a>
-            <ul class='sub-menus'>
-              <li><a href='/listarOfertas'>Lista</a></li>
-              {% if is_login %}
-                <li><a href='/agregar'>Agregar</a></li>
-              {% endif %} 
-            </ul>
+          <li><a class='dropdown-arrow' href='/verOfertaGrid'>Noticias</a>
           </li>
-          <li><a href='/mapa'>Mapa</a></li>
           <li><a class='dropdown-arrow' href=''>Nosotros</a>
             <ul class='sub-menus'>
               <li><a href='/building'>Misión</a></li>
               <li><a href='/building'>Visión</a></li>
-              <li><a href='/building'>Objetivos</a></li>
+              <li><a href='/building'>objetivos</a></li>
             </ul>
           </li>
-          <li><a href='/building'>Contactenos</a></li>
-          
-          {% if is_login %}
-            <li><a class='dropdown-arrow' href=''>{{ session['usuario']}} </a>
-              <ul class='sub-menus'>
-                <li> <a href="/perfil/{{ session['usuario']}}"> Perfil</a> </li>                
-                {% if is_login %}
-                  <li><a href='/loginRecov'>Cambiar la clave</a></li>
-                {% endif %} 
-
-                {% if is_admin %}
-                  <li> <a href="/logincrea"> Crear usuario</a> </li>
-                {% endif%}
-                <li> <a href="/logout"> (Salir)</a> </li>
-              </ul> 
-          {% else %}
-            <li><a href='/login'>Login</a></li>
-          {% endif %}
-          
+          <li><a href="{{ url_for('public.contact') }}">Contactenos</a></li>
+        
         </ul>
       </aside>
     </section>

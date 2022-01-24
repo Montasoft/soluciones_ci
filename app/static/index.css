@@ -1,0 +1,214 @@
+.fondoencabezado{
+	width: 100%;
+	height: 80%x;
+
+}
+.grid{
+
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350Px, 1fr));
+
+}
+
+.grid4{
+
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200Px, 1fr));
+
+}
+
+.grid_element4{
+	background-color: rgb(247, 241, 224);
+	width: 95%;
+	height: 95%;
+	border-radius: 10px;
+	padding: 20px;
+	grid-gap: 20px;
+
+}
+
+.foto{
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	max-width: 350vw;
+	min-width: 4cm;
+	margin: auto;
+	border-radius: 5%;
+}
+
+.descripcion{
+	text-align: center;
+	padding-left: 30px;
+	padding-right: 30px;
+
+}
+
+
+
+
+/*seccion en deshuso */
+.columnass{
+  
+  	display: grid;
+	width: 100%;
+	max-width: 1000 px;
+	height: 250px;
+	grid-gap: 20px;
+  	grid-template-areas:  "a b c"
+  						  "d e f"
+						  "j j j"
+						  "k k k"
+						  "l l l";
+  	
+	/* define the number of grid columns 	
+	grid-template-columns: repeat(3, 1fr);*/
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	grid-template-rows: repeat(6, auto);
+
+}
+
+.columnass > div { 
+	background: rgb(243, 240, 234);
+	padding:20px;
+	border-radius: 4px;
+}
+.a{ 
+	grid-area: a;
+}
+
+.b{ 
+	grid-area: b;
+}
+
+.c{ 
+	grid-area: c;
+}
+
+.d{ 
+	grid-area: d;
+}
+
+.e{ 
+	grid-area: e;
+}
+
+.f{ 
+	grid-area: f;
+}
+
+.formulario{ 
+	grid-area: j;
+}
+.direccion{ 
+	grid-area: k;
+}
+.piedepagina{ 
+	grid-area: l;
+	
+}
+
+
+.lema {
+	column-span:all;
+	text-align: center;
+}
+
+.logo{
+	width: 50px;
+	height: 50px;
+}
+
+.fotos{
+	object-fit: cover;
+	width: 90%;
+	height: 90%;
+	max-width: 350vw;
+	min-width: 4cm;
+	margin: auto;
+	border-radius: 50%;
+}
+
+.titulo_servicio{
+	text-align: center;
+}
+
+.descripcion{
+	text-align: center;
+}
+
+.direccion{
+	text-align: center;
+}
+
+
+/*
+.contenido {
+	flex: 1 0 auto;
+	width: 100%;
+	padding: 0 10px;
+	margin: auto;
+}
+
+.seccion {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-around;
+	overflow: hidden;
+
+}
+
+.seccion > .columna {
+	flex-basis: 0;
+}
+
+.seccion > .columna > .parte.texto {
+	padding: 10px;
+}
+
+.seccion figure {
+	margin: 0;
+}
+
+.seccion img {
+	object-fit: cover;
+	max-width: 100vw;
+	min-width: 4cm;
+	margin: auto;
+}
+
+.seccion.imagenes-redondas img {
+	border-radius: 50%;
+}
+
+.seccion.imagenes-bordeadas img {
+	
+    border: 1px solid silver;
+	padding: 5px;
+    display:block;
+    width: 200px;
+	height: 200px;
+	object-fit: none;
+    border-radius: 50%;
+    
+    
+}
+*/
+.parte a:link {
+	color: grey;
+}
+
+.parte a:visited {
+	color: grey;
+}
+
+.parte a:hover {
+	color: black;
+}
+
+.parte_imagen{
+	width: 100px;
+	
+}
