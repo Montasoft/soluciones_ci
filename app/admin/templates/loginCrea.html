@@ -1,0 +1,99 @@
+{% extends 'baseLogin.html' %}
+
+<body onload="UbicarPlaceHolder()">
+  {% block contenido %}    
+
+    <div class="container">
+      <div class="backbox">
+        <div class="loginMsg">
+        </div>
+        <div class="signupMsg visibility">
+          
+        </div>
+      </div>
+      <div class="frontbox">
+        <div class="login">
+          <div class="inputbox">
+            <form class= "formulario" name=form method="POST" action="/logincrea" novalidate>
+              {{form.hidden_tag()}}
+              <button class="volver" id="switch1"><a href="{{url_for('inicio')}}" style="color: #000000;">Página de inicio</a></button>
+                <h1 class="Titulo">Registro de usuarios</h1>
+
+              
+                <p class= "nota">Al registrarte se te enviará un link de activación a tu correo electrónico</p>
+
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                  <div class=flashe>
+                    <ul class=flashes>
+                      {% for message in messages %}
+                        {{message}}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  {% endif %}
+                {% endwith %}                 
+        
+              <div>
+                {{form.nickname(class= "caja", size=30)}}
+                {{form.nickname.label(class= "label_")}}
+                {% for error in form.nickname.errors %}
+                  <span style="color:red;">{{ error }}<br></span>
+                {% endfor %}
+              </div>
+              <div>
+                {{form.nombre(class= "caja", size=30)}}
+                {{form.nombre.label(class= "label_")}}
+              </div>
+              <div>
+                {{form.correo(class= "caja", size=30)}}
+                {{form.correo.label(class= "label_", size=30)}}
+                {% for error in form.correo.errors %}
+                  <span style="color: red;">{{ error }}<br></span>
+                {% endfor %}
+              </div>
+              <div>
+                {{form.rol(class= "caja")}}
+                {{form.rol.label(class= "label_")}}
+
+              </div>
+
+              <div>
+                {{form.clave1(class= "caja", size=30)}}
+                {{form.clave1.label(class= "label_", size=30)}}
+                {% for error in form.clave2.errors %}
+                  <span style="color: red;">{{ error }}<br></span>
+                {% endfor %}
+              </div>
+              <div>
+                {{form.clave2(class= "caja", size=30)}}
+                {{form.clave2.label(class= "label_", size=30)}}
+                {% for error in form.clave2.errors %}
+                  <span style="color: red;">{{ error }}<br></span>
+                {% endfor %}
+               
+              </div>
+              <div>
+                {{form.registro(class= "btn")}}
+                
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class=flashes>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+              </div>
+              <!-- <button>Registrarse</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" language="javascript" src="{{url_for('static',filename='login.js')}}"></script>
+
+  {% endblock %}
+</html>

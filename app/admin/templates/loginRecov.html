@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="{{url_for('static',filename='EstiloLogin.css')}}">
+
+</head>
+
+<body>
+
+  <div class="container">
+      <div class="backbox">
+        <div class="loginMsg">
+          <div class="textcontent">
+          </div>
+        </div>
+        <div class="signupMsg visibility">
+          <div class="textcontent">
+          </div>
+        </div>
+      </div>
+      <!-- backbox -->
+      <div class="frontbox">
+        <div class="login">
+          <div class="inputbox">
+            <form class= "formulario" name=form action="/loginRecov" method="POST"  novalidate>
+
+              <h1 class="Titulo">Recupera o modifica <br>tu contraseña</h1>
+
+              <p class="nota">Ingresa el correo electrónico con el que te has registrado previamente</p>
+              {{form.hidden_tag()}}
+              <div>
+                {{form.correo(class="caja", size=30)}}
+                {{form.correo.label(class="label_", size=30)}}
+
+              </div>
+              <p>Se te enviará un link a tu correo para recuperar o actualizar la contraseña</p>
+          
+              <div>
+                {{form.enviar()}}
+                <button id="switch1"><a href="{{url_for('inicio')}}" style="color: rgb(2, 2, 2);">Página de inicio</a></button>
+              </div>
+              {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+
+            </form>
+          </div>  
+          <!-- <button>Recuperar contraseña</button> -->
+        </div>
+      </div>
+      <!-- frontbox -->
+    </div>
+  </body>
+  <script type="text/javascript" language="javascript" src="{{url_for('static',filename='login.js')}}"></script>
+
+</html>

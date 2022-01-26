@@ -1,0 +1,43 @@
+{% extends 'baseLogin.html' %}
+
+<body>
+  {% block contenido %}    
+
+    <section class="content">
+
+    <form class= "formulario" name=form action="/login" method="POST" novalidate>
+        {{form.hidden_tag()}}
+        <h1 class="Titulo">Login</h1>
+        <div class ="campo">
+            {{form.nickname(class= "caja", id="caja1", size=30, autocomplete="off")}}
+            {{form.nickname.label(class= "label_")}}
+        </div>
+        
+        <div class="campo">
+            {{form.password(class="caja", size=30, autocomplete="off")}}
+            {{form.password.label(class= "label_")}}
+        </div>
+        <p><a href="{{url_for('loginRecov')}}" style="color: black;">¿Olvidaste la contraseña?</a></p>
+        
+        <div>
+            {{form.ingresar(class="button")}}
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class=flashe>
+            <ul class=flashes>
+               {% for message in messages %}
+                    <li >{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+    </form>
+    <script type="text/javascript" language="javascript" src="{{url_for('static',filename='login.js')}}"></script>
+
+  {% endblock %}
+</body>
+

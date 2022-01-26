@@ -47,7 +47,7 @@ def show_signup_form():
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('public.index')
             return redirect(next_page)
-    return render_template("auth/signup_form.html", form=form, error=error)
+    return render_template("loginCrea.html", form=form, error=error)
 
 
 @admin_bp.route('/login', methods=['GET', 'POST'])
@@ -56,14 +56,14 @@ def login():
         return redirect(url_for('public.index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.get_by_email(form.email.data)
+        user = User.get_by_nickname(form.nickname.data)
         if user is not None and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('public.index')
             return redirect(next_page)
-    return render_template('auth/login_form.html', form=form)
+    return render_template('/login.html', form=form)
 
 
 @admin_bp.route('/logout')

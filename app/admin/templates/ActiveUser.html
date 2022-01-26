@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='EstiloLogin.css')}}">
+
+</head>
+<body>
+    <div class="container">
+      <div class="frontbox">
+        <div class="login">
+          <div class="inputbox">
+            <form class= "formulario" name=form action="" method="POST" novalidate>
+
+              {{form.hidden_tag()}}
+                <h2 class="Titulo">Acivación de cuenta de usuario</h2>
+                <h3 class="Usuario">Para el usuario: '{{ usuarioActual }}'</h3>
+                <h3 class="Usuario">Por Favor establezca su contraseña</h3>
+                  <div>
+                 </div>
+    
+
+              <div>
+                {{form.clave1(class= "caja", size=30)}}
+                {{form.clave1.label(class= "label_", size=30)}}
+                {% for error in form.clave2.errors %}
+                  <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div>
+                {{form.clave2(class= "caja", size=30)}}
+                {{form.clave2.label(class= "label_", size=30)}}
+                {% for error in form.clave2.errors %}
+                  <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              
+              <div>
+                {{form.activeUser()}}
+                <button id="switch1"><a href="{{url_for('inicio')}}" style="color: rgb(0, 0, 0);">Página de inicio</a></button>
+
+                
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class=flashes>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+              </div>
+              <!-- <button>Registrarse</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" language="javascript" src="{{url_for('static',filename='login.js')}}"></script>
+
+</html>
