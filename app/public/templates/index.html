@@ -39,20 +39,20 @@
       </div>
 
 		
-<link rel="stylesheet" href="{{url_for('static',filename='inicio.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='inicio.css')}}">
 
 		<div id="navegacion" class="alterno">
 
 			<header id="encabezado" 
-			style= "background-image:image({{ url_for('static', filename='/imagenes/encabezado.jpeg')}})">
-			<img src="{{url_for('static', filename='/imagenes/encabezado.jpg')}}"class="fondoencabezado" >
+				style= "background-image:image({{ url_for('static', filename='/imagenes/encabezado.jpeg')}})">
+				<img src="{{url_for('static', filename='/imagenes/encabezado.jpg')}}"class="fondoencabezado" >
 			
-		</header>
+			</header>
 		
 		<div class = "columna">
 			<h1 class ="lema"> <strong>Soluciones C.I.</strong> Es una compañía constituida con el propósito de brindar servicios de consultoría técnica y ejecución de proyectos relacionados con gestión territorial, actividades catastrales y obras civiles.</h1>	
 		
-	</div>
+		</div>
 
 	<!-- Inica la cuadrícula -->
 	<div class= grid>	
@@ -119,44 +119,26 @@
 			<h2 class="titulo_servicio"><a href="/building">Observatorio Inmobiliario</h2></a>
 			<p class= "descripcion" >Captura procesamiento y análisis de datos de mercado inmobiliario..</p>
 		</div>
-
-	</div>
-		<div class="formulario">
-			<form method="post">
-				
-				<input type="hidden" name="identificador-formulario" value="ybfxsdstzutx1ldl64wc">
-				<input type="hidden" name="titulo-formulario" value="">
-				<label for="iden8791458799123524">Su nombre:</label>
-				<input type="text" id="iden8791458799123524" name="iden8791458799123524" maxlength="255">
-				<input type="hidden" name="titulo-iden8791458799123524" value="U3Ugbm9tYnJlOg==">
-				<label for="iden6116732802414011">Teléfono de contacto:</label>
-				<input type="tel" id="iden6116732802414011" name="iden6116732802414011" maxlength="20">
-				<input type="hidden" name="titulo-iden6116732802414011" value="VGVsw6lmb25vIGRlIGNvbnRhY3RvOg==">
-				<label for="iden5567800127004257">Correo electrónico:</label>
-				<input type="email" id="iden5567800127004257" name="iden5567800127004257" maxlength="100">
-				<input type="hidden" name="titulo-iden5567800127004257" value="Q29ycmVvIGVsZWN0csOzbmljbzo=">
-				<label for="iden37967862033754485">Déjenos su mensaje:</label>
-				<textarea id="iden37967862033754485" name="iden37967862033754485" maxlength="3000" rows="4"></textarea>
-				<input type="hidden" name="titulo-iden37967862033754485" value="RMOpamVub3Mgc3UgbWVuc2FqZTo=">
-				<input type="submit" value="Enviar">
-			</form>
-		
-			
-		<div class="direccion">
-			<div class="columna1">
-				<div class="parte_texto">
-					<p><strong>Dirección:</strong>&nbsp;Cra. 7 # 7N-12, Of. 301, Piedecuesta, Santander</p><p><strong>Correo electrónico:</strong>&nbsp;contacto@mygsas.com</p><p><strong>Teléfono:</strong>&nbsp;312 339 1131</p><p></p>
-				</div>
-			</div>
-		</div>
+	</div>	
 	
 		<footer id="piedepagina", class="piedepagina">
 			<div style="width: 100%;">
-				<p>SOLUCIONES CATASTRALES E INGENIERIA S.A.S.</p>
+
+				<p><br>SOLUCIONES CATASTRALES E INGENIERIA S.A.S.</p>
+				<div class="direccion">
+					<div class="columna1">
+						<div class="parte_texto">
+							<p><strong>Dirección:</strong>&nbsp;Cra.1 Nº 10-14 Abrego Norte de Santander<br>
+							<strong>Correo electrónico:</strong>&nbsp;contacto@solucionesci.com<br>
+							<strong>Teléfono:</strong>&nbsp;312 339 1131</p>
+						</div>
+					</div>
+				</div>
+		
 			</div>
 		</footer>
 	
-	</div>
+	
 
 	{% endblock %}
 		

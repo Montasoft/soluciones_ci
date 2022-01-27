@@ -5,22 +5,21 @@ from slugify import slugify
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 
-
 from app import db
 
-class User(db.Model, UserMixin,):
+class User(db.Model, UserMixin):
 
     __tablename__ = 'sci_user'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
-    nickname1 = db.column(db.String(20))
     email = db.Column(db.String(256), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     is_active= db.Column(db.Boolean, default=False)
     fechaCre4 = db.Column(db.DateTime(TIMESTAMP))
-
+    #nick = db.column(db.String(20), nullable=False)
+    
 
     def __init__(self, name, email):
         self.name = name
