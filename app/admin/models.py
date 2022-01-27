@@ -4,6 +4,9 @@ from flask import url_for
 from slugify import slugify
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.sqltypes import TIMESTAMP
+from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy.orm import synonym, sessionmaker
+
 
 from app import db
 
@@ -51,7 +54,8 @@ class User(db.Model, UserMixin):
     def get_by_nickname(nickname):
         return User.query.filter_by(nickname=nickname).first()
 
-
+Session = sessionmaker()
+session = Session
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
