@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, escape
 from flask_login import login_required, current_user, login_user, logout_user
 from .models import Post, User
 from . import admin_bp
@@ -13,8 +13,8 @@ from app import login_manager
 def post_form(post_id):
     form = PostForm()
     if form.validate_on_submit():
-        title = form.title.data
-        content = form.content.data
+        title = escape(form.title.data)
+        content = escape(form.content.data)
         post = Post(user_id=current_user.id, title=title, content=content)
         post.save()
         return redirect(url_for('public.index'))
@@ -29,9 +29,9 @@ def show_signup_form():
     form = SignupForm()
     error = None
     if form.validate_on_submit():
-        name = form.name.data
-        email = form.email.data
-        password = form.password.data
+        name = escape(form.name.data)
+        email = escape(form.email.data)
+        password = escape(form.password.data)
         # Comprobamos que no hay ya un usuario con ese email
         user = User.get_by_email(email)
         if user is not None:
@@ -53,11 +53,13 @@ def show_signup_form():
 @admin_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
+        
         return redirect(url_for('public.index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.get_by_nickname(form.nickname.data)
-        if user is not None and user.check_password(form.password.data):
+        nick = (escape(form.nickname.data))
+        user = User.get_by_nickname(escape(form.nickname.data))
+        if user is not None and user.check_password(escape(form.password.data)):
             login_user(user, remember=form.remember_me.data)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
@@ -65,6 +67,10 @@ def login():
             return redirect(next_page)
     return render_template('/login.html', form=form)
 
+
+@admin_bp.route('/loginrecover')
+def loginrecover():
+    return "ha pedido recuperar la ontraseña"
 
 @admin_bp.route('/logout')
 def logout():

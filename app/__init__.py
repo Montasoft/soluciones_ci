@@ -3,12 +3,21 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import true
 #from flask_migrate import Migrate
+from flask_wtf.csrf import CSRFProtect
+import os
+
 
 login_manager = LoginManager()
 db = SQLAlchemy()
 
+
 def create_app(settings_module):
     app = Flask(__name__, instance_relative_config=True)
+
+    app.secret_key = os.urandom(24) #24 bits
+    csrf = CSRFProtect(app)
+
+
     # load the config file specified by the APP enviroment varibale
     app.config.from_object(settings_module)
     # load the configuration form the instance folder
@@ -19,7 +28,6 @@ def create_app(settings_module):
 
     login_manager.init_app(app)
     login_manager.login_view = "login"
-
 
     db.init_app(app)
     
