@@ -1,11 +1,13 @@
 import os
-import config
 
 from app import create_app
 
-APP_SETTINGS_MODULE = config.local
+import instance.config
 
 settings_module = os.getenv('APP_SETTINGS_MODULE')
+print ("*****   ", os.environ['APP_SETTINGS_MODULE'])
+
+print("*****   ", settings_module)
 
 app = create_app(settings_module)
 

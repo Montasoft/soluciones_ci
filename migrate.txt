@@ -1,0 +1,23 @@
+para migrar
+
+crear modelos
+
+establecer conexión con la base de datos
+app.config['SQLALCHEMY_DATABASE_URI']= 'mysql://root:@localhost/sci_db'
+
+importar migrate
+	from flask_migrate import Migrate
+
+	db = SQLAlchemy()
+	migrate = Migrate()
+
+en la definición de la app
+
+    db.init_app(app)
+    migrate.init_app(app,db)
+
+y por consola
+
+	flask db init
+	flask db migrate
+	flask db upgrade

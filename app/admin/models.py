@@ -7,7 +7,6 @@ from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy import Column, Integer, String, Float, DateTime
 from sqlalchemy.orm import synonym, sessionmaker
 
-
 from app import db
 
 class User(db.Model, UserMixin):
@@ -20,7 +19,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     is_active= db.Column(db.Boolean, default=False)
-    fechaCre4 = db.Column(db.DateTime(TIMESTAMP))
+    fechaCre4 = db.Column(db.DateTime())
     #nick = db.column(db.String(20), nullable=False)
     
 
@@ -59,7 +58,7 @@ session = Session
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('blog_user.id', ondelete='CASCADE'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('sci_user.id', ondelete='CASCADE'), nullable=False)
     title = db.Column(db.String(256), nullable=False)
     title_slug = db.Column(db.String(256), unique=True, nullable=False)
     content = db.Column(db.Text)
