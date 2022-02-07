@@ -1,0 +1,127 @@
+:root {
+    --color-main: #2c6e8d;
+    --primary: #2c6e8d;
+    --Color-main-txt: #fff;
+  }
+
+* {
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    font-family: sans-serif;
+}
+
+.formulario{
+    width: 700px;
+    max-width: 100%;
+    margin:auto;
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+.Titulo{
+    text-align: center;
+    margin-top: 10;
+    margin-bottom: 40px;
+}
+.nota{
+    margin-top: -30px;
+    margin-bottom: 40px;
+}
+.volver{
+    ruby-align: right;
+    margin-top: -40px;
+}
+
+.Usuario{
+    margin-bottom: 40px;
+}
+.caja, .label_{
+    display: block;
+    width: 100%;
+    font-size: 1.2em;
+ 
+}
+
+.caja{
+    padding: 15px;
+    border: 1 px solid rgba(0, 0, 0, 3);
+    background: rgba(0, 0,0,.1);   
+    margin-top: 40px;
+}
+
+.label1_{
+    padding-left: 15px;
+    position: absolute; 
+    margin-top: -40px;
+    z-index: -20;
+    color: rgba(0, 0, 0, 5);
+    transition: all 0.2s;
+}
+
+.caja:focus{
+  /*  border: 2px solid rgb(23, 129, 250);*/
+    border-color: blue;
+    background-color: lightsteelblue;
+    z-index: 0;
+}
+
+.caja:focus +
+.label_{
+    margin-top: -75px;
+    font-size: 0.8em;
+    
+}
+
+.fijar{
+    margin-top: -75px;
+    font-size: 0.8em;
+}
+
+
+form input[type="submi2t"]{
+	width:100%;
+	padding:8px 16px;
+	margin-top:32px;
+    margin-bottom: 32px;
+	border:1px solid rgb(245, 106, 13);
+	border-radius:5px;
+	display:block;
+	color:#fff;
+    background-color:rgb(245, 106, 13);
+    cursor: pointer
+    
+} 
+
+.flashe{
+    color:rgb(0, 0, 0);
+    background-color: rgb(248, 212, 230);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius:5px;
+}
+
+.header {
+    color: var(--color-main);
+    font-size: 27px;
+    padding: 10px;
+}
+
+.bigicon {
+    font-size: 35px;
+    color: var(--color-main);
+}
+
+
+.line-titulo{
+    display: flex;
+    align-items: center;
+}
+
+.btn-principal {
+    background-color: var(--color-main);   
+    color: var(--Color-main-txt);
+}

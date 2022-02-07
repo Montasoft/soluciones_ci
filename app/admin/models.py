@@ -1,3 +1,4 @@
+import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import url_for
@@ -19,13 +20,14 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     is_active= db.Column(db.Boolean, default=False)
-    fechaCre4 = db.Column(db.DateTime())
-    #nick = db.column(db.String(20), nullable=False)
+    fechaCre4 = db.Column(db.DateTime(TIMESTAMP))
+    nickname = db.Column(db.String(20), nullable=False)
     
 
-    def __init__(self, name, email):
+    def __init__(self, name, email, nickname):
         self.name = name
         self.email = email
+        self.nickname = nickname
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -62,6 +64,22 @@ class Post(db.Model):
     title = db.Column(db.String(256), nullable=False)
     title_slug = db.Column(db.String(256), unique=True, nullable=False)
     content = db.Column(db.Text)
+    created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    archivo = db.Column(db.String(256))
+    '''
+    comments = db.relationship('Comment', backref='post', lazy=True, cascade='all, delete-orphan',
+                               order_by='asc(Comment.created)')
+
+    class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('blog_user.id', ondelete='SET NULL'))
+    user_name = db.Column(db.String)
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+    content = db.Column(db.Text)
+    created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    
+    '''
+
 
     def __repr__(self):
         return f'<Post {self.title}>'
@@ -82,6 +100,10 @@ class Post(db.Model):
                 count += 1
                 self.title_slug = f'{self.title_slug}-{count}'
 
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
     def public_url(self):
         return url_for('public.show_post', slug=self.title_slug)
 
@@ -90,6 +112,34 @@ class Post(db.Model):
         return Post.query.filter_by(title_slug=slug).first()
 
     @staticmethod
+    def get_by_id(id):
+        return Post.query.get(id)
+
+    @staticmethod
     def get_all():
         return Post.query.all()
 
+
+
+class Link(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    number = db.Column(db.String(256), nullable=False)
+    nickname = db.Column(db.String(20), nullable=False)
+    correo = db.Column(db.String(256), nullable=False)
+    estado = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return f'<Link {self.number}>'
+
+    def save(self):
+        if not self.id:
+            db.session.add(self)
+        try:
+            db.session.commit()
+            saved = True
+        except IntegrityError:
+            saved = False
+    
+    @staticmethod
+    def get_by_num(number):
+        return Link.query.filter_by(number=number).first()

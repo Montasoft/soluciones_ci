@@ -19,7 +19,6 @@ def create_app(settings_module):
     #app = Flask(__name__, instance_relative_config=True)
     app = Flask(__name__, instance_relative_config=True)
 
-
     app.secret_key = os.urandom(24) #24 bits
     csrf = CSRFProtect(app)
 
@@ -69,6 +68,7 @@ def create_app(settings_module):
 
     app.config.update(mail_setting)
     mail = Mail(app)
+    
 
     return app
 

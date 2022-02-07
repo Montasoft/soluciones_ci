@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="{{url_for('static',filename='EstiloLogin.css')}}">
-
-</head>
-
+{% extends 'baseLogin.html' %}
 <body>
+
+  {% block contenido %}    
 
   <div class="container">
       <div class="backbox">
@@ -26,7 +18,7 @@
       <div class="frontbox">
         <div class="login">
           <div class="inputbox">
-            <form class= "formulario" name=form action="/loginRecov" method="POST"  novalidate>
+            <form class= "formulario" name=form action="" method="POST"  novalidate>
 
               <h1 class="Titulo">Recupera o modifica <br>tu contraseña</h1>
 
@@ -39,10 +31,10 @@
               </div>
               <p>Se te enviará un link a tu correo para recuperar o actualizar la contraseña</p>
           
-              <div>
-                {{form.enviar()}}
-                <button id="switch1"><a href="{{url_for('inicio')}}" style="color: rgb(2, 2, 2);">Página de inicio</a></button>
+              <div class="col-md-12 text-center">
+                {{form.enviar(class= "btn btn-principal btn-lg")}}
               </div>
+              <button id="switch1"><a href="{{url_for('public.index')}}" style="color: rgb(2, 2, 2);">Página de inicio</a></button>
               {% with messages = get_flashed_messages() %}
               {% if messages %}
                 <ul class=flashes>
@@ -60,7 +52,6 @@
       </div>
       <!-- frontbox -->
     </div>
-  </body>
-  <script type="text/javascript" language="javascript" src="{{url_for('static',filename='login.js')}}"></script>
-
-</html>
+    
+  {% endblock %}
+</body>

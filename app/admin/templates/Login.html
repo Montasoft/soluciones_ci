@@ -1,6 +1,6 @@
 {% extends 'baseLogin.html' %}
-
 <body>
+
   {% block contenido %}    
 
     <section class="content">
@@ -8,19 +8,27 @@
     <form class= "formulario" name=form action="/login" method="POST" novalidate>
         {{form.hidden_tag()}}
         <h1 class="Titulo">Login</h1>
-        <div class ="campo">
-            {{form.nickname(class= "caja", id="caja1", size=30, autocomplete="off")}}
-            {{form.nickname.label(class= "label_")}}
+        <div class ="form-group">
+            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+            {{form.usuario.label(class= "label_")}}
+            {{form.usuario(class= "form-control", id="caja1", size=30, autocomplete="off")}}
+            
         </div>
         
-        <div class="campo">
-            {{form.password(class="caja", size=30, autocomplete="off")}}
+        <div class="form-group">
+            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-key bigicon"></i></span>
             {{form.password.label(class= "label_")}}
+            {{form.password(class="form-control", size=30, autocomplete="off")}}
+            
         </div>
         <p><a href="{{url_for('admin.loginrecover')}}" style="color: black;">¿Olvidaste la contraseña?</a></p>
         
         <div>
-            {{form.ingresar(class="button")}}
+            <div class="col-md-12 text-center">
+                <button type="submit1" class="btn btn-principal btn-lg">
+                    {{form.ingresar(class="btn btn-principal btn-lg")}}
+                </button>    
+            </div>
         </div>
 
         {% with messages = get_flashed_messages() %}

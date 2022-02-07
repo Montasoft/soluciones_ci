@@ -14,13 +14,13 @@
       <div class="frontbox">
         <div class="login">
           <div class="inputbox">
-            <form class= "formulario" name=form method="POST" action="/signup" novalidate>
+            <form class= "formulario" name=form method="POST" action="" novalidate>
               {{form.hidden_tag()}}
               <button class="volver" id="switch1"><a href="{{url_for('admin.login')}}" style="color: #000000;">Página de inicio</a></button>
-                <h1 class="Titulo">Registro de usuarios</h1>
+                <h1 class="Titulo">Registrar nuevo Post</h1>
 
               
-                <p class= "nota">Al registrarte se te enviará un link de activación a tu correo electrónico</p>
+                <p class= "nota">Por favor incluya la información a mostrar en el nuevo post</p>
 
                 {% with messages = get_flashed_messages() %}
                   {% if messages %}
@@ -35,41 +35,21 @@
                 {% endwith %}                 
         
               <div>
-                {{form.nickname(class= "caja", size=30)}}
-                {{form.nickname.label(class= "label_")}}
-                {% for error in form.nickname.errors %}
+                {{form.title(class= "caja", size=30)}}
+                {{form.title.label(class= "label_")}}
+                {% for error in form.title.errors %}
                   <span style="color:red;">{{ error }}<br></span>
                 {% endfor %}
               </div>
               <div>
-                {{form.name(class= "caja", size=30)}}
-                {{form.name.label(class= "label_")}}
-              </div>
-              <div>
-                {{form.email(class= "caja", size=30)}}
-                {{form.email.label(class= "label_", size=30)}}
-                {% for error in form.email.errors %}
-                  <span style="color: red;">{{ error }}<br></span>
-                {% endfor %}
-              </div>
-              
-              <div>
-                {{form.clave1(class= "caja", size=30)}}
-                {{form.clave1.label(class= "label_", size=30)}}
-                {% for error in form.clave2.errors %}
+                {{form.content(class= "caja", size=30)}}
+                {{form.content.label(class= "label_", size=30)}}
+                {% for error in form.content.errors %}
                   <span style="color: red;">{{ error }}<br></span>
                 {% endfor %}
               </div>
               <div>
-                {{form.clave2(class= "caja", size=30)}}
-                {{form.clave2.label(class= "label_", size=30)}}
-                {% for error in form.clave2.errors %}
-                  <span style="color: red;">{{ error }}<br></span>
-                {% endfor %}
-               
-              </div>
-              <div>
-                {{form.registro(class= "btn")}}
+                {{form.submit(class= "btn")}}
                 
                 {% with messages = get_flashed_messages() %}
                   {% if messages %}

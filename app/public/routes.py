@@ -34,13 +34,11 @@ def contact():
 
         # Enviamos un email sobre el contacto
         send_email(subject='nuevo contacto realizado en Solciones CI.com',
-                    
-                  # sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
                    sender=os.environ['DONT_REPLY_FROM_EMAIL'],
                    recipients=['jorge.montagut@hotmail.es', ],
                    text_body=f'nombre {nombre}, correo {correo}, teléfono: {telefono}, asunto {asunto}, mensaje {mensaje}',
                    html_body=f'<p>Hola <strong>{nombre}</strong>,  correo {correo}, teléfono: {telefono}, asunto {asunto}, mensaje {mensaje} bienvenid@ al miniblog de Flask</p>')
-
+        return redirect (url_for('public.index'))
     else:
         return render_template('contact.html', form=form)
     return render_template('contact.html', form=form)
