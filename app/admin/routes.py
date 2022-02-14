@@ -1,5 +1,5 @@
 import random
-from flask import render_template, redirect, url_for, request, escape
+from flask import render_template, redirect, url_for, request, escape, current_app
 from flask_login import login_required, current_user, login_user, logout_user
 from .models import Post, User, Link
 from . import admin_bp
@@ -8,20 +8,39 @@ from werkzeug.urls import url_parse
 from app import login_manager
 from app.common.mail import send_email
 import os
+from werkzeug.utils import secure_filename
+
 
 
 @admin_bp.route("/admin/post/", methods=['GET', 'POST'], defaults={'post_id': None})
 @admin_bp.route("/admin/post/<int:post_id>/", methods=['GET', 'POST'])
-@login_required
+#@login_required
 def post_form(post_id):
     form = PostForm()
     if form.validate_on_submit():
+        print("Validate")
         title = escape(form.title.data)
         content = escape(form.content.data)
+        file= form.post_image.data
+        image_name = None
+        print(file)
+        # comprueba si la petición contiene la parte del fichero
+        if file:
+        # Si el usuario no selecciona un fichero, el navegador
+        # enviará una parte vacía sin nombre de fichero
+        
+            image_name = secure_filename(file.filename)
+            images_dir = current_app.config['POSTS_IMAGES_DIR']
+            print(images_dir, "///", image_name)
+            os.makedirs(images_dir, exist_ok=True)
+            file_path = os.path.join(images_dir, image_name)
+            file.save(file_path)  
+
         post = Post(user_id=current_user.id, title=title, content=content)
+        post.archivo  = image_name
         post.save()
         return redirect(url_for('public.index'))
-    return render_template("admin/post_form.html", form=form)
+    return render_template("admin/newpost.html", form=form)
 
 
   
@@ -173,9 +192,25 @@ def news():
         return redirect(url_for('public.index'))
     form = PostForm()
     error = None
+    
     if form.validate_on_submit():
+        print("Validate")
         title = escape(form.title.data)
         content = escape(form.content.data)
+        file= form.post_image.data
+        image_name = None
+        print(file)
+        # comprueba si la petición contiene la parte del fichero
+        if file:
+        # Si el usuario no selecciona un fichero, el navegador
+        # enviará una parte vacía sin nombre de fichero
+        
+            image_name = secure_filename(file.filename)
+            images_dir = current_app.config['POSTS_IMAGES_DIR']
+            print(images_dir, "///", image_name)
+            os.makedirs(images_dir, exist_ok=True)
+            file_path = os.path.join(images_dir, image_name)
+            file.save(file_path)  
 
         # Creamos el new post y guardarlo.
         

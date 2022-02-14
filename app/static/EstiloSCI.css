@@ -1,8 +1,8 @@
 :root {
     --color-main: #2c6e8d;
     --primary: #2c6e8d;
-    --Color-main-txt: #fff;
-  }
+    --Color-main-txt: #fff; 
+}
 
 * {
     box-sizing: border-box;
@@ -125,3 +125,4 @@ form input[type="submi2t"]{
     background-color: var(--color-main);   
     color: var(--Color-main-txt);
 }
+

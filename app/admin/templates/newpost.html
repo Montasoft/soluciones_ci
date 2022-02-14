@@ -14,7 +14,7 @@
       <div class="frontbox">
         <div class="login">
           <div class="inputbox">
-            <form class= "formulario" name=form method="POST" action="" novalidate>
+            <form class= "formulario" name=form method="POST" action="" enctype="multipart/form-data" novalidate>
               {{form.hidden_tag()}}
               <button class="volver" id="switch1"><a href="{{url_for('admin.login')}}" style="color: #000000;">Página de inicio</a></button>
                 <h1 class="Titulo">Registrar nuevo Post</h1>
@@ -36,7 +36,7 @@
         
               <div>
                 {{form.title(class= "caja", size=30)}}
-                {{form.title.label(class= "label_")}}
+                {{form.title.label(size= 20, class= "label_")}}
                 {% for error in form.title.errors %}
                   <span style="color:red;">{{ error }}<br></span>
                 {% endfor %}
@@ -48,6 +48,15 @@
                   <span style="color: red;">{{ error }}<br></span>
                 {% endfor %}
               </div>
+
+              <div>
+                {{ form.post_image.label }}
+                {{ form.post_image }}<br>
+                {% for error in form.post_image.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
+
               <div>
                 {{form.submit(class= "btn")}}
                 

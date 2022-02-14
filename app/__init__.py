@@ -14,35 +14,45 @@ db = SQLAlchemy()
 migrate = Migrate()
 mail = Mail()   # Instanciamos un objeto de tipo Mail
 
+settings_module= os.getenv('APP_SETTINGS_MODULE')
 
-def create_app(settings_module):
+#def create_app(settings_module= 'config.DevelopmentConfig'):
+def create_app():
     #app = Flask(__name__, instance_relative_config=True)
-    app = Flask(__name__, instance_relative_config=True)
+#app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__)
+    
+   # sqlalchemy = SQLAlchemy()
+    #sqlalchemy.init_app(app)
 
-    app.secret_key = os.urandom(24) #24 bits
-    csrf = CSRFProtect(app)
+    # load the config file specified by the APP enviroment varibale
+    app.config.from_object(settings_module)
 
-    app.config['SQLALCHEMY_DATABASE_URI']= 'mysql://root:@localhost/sci_db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+#app.secret_key = os.urandom(24) #24 bits
+#csrf = CSRFProtect(app)
 
-    #db = SQLAlchemy(app)
+    #   app.config['SQLALCHEMY_DATABASE_URI']= 'mysql://root:@localhost/sci_db'
+    #  app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db = SQLAlchemy(app)
     #migrate = Migrate(app,db)
 
-    db.init_app(app)
-    migrate.init_app(app,db)
-  #  mail.init_app(app) # iniciamos el objeto mail.
+#db.init_app(app)
+#migrate.init_app(app,db)
+    #  mail.init_app(app) # iniciamos el objeto mail.
 
     #db.create_all()
 
 
-    # load the config file specified by the APP enviroment varibale
-    app.config.from_object(settings_module)
+    
     # load the configuration form the instance folder
-    if app.config.get('TESTING', False):
-        app.config.from_pyfile('config-testing.py', silent=True)
-    else:
-        app.config.from_pyfile('config.py', silent=True)
-
+    # comento 3
+    #if app.config.get('TESTING', False):
+    #    app.config.from_pyfile('config-testing.py', silent=True)
+    #else:
+#app.config.from_pyfile('config.py', silent=True)
+    app.config.from_pyfile('config.local.py', silent=True)
     login_manager.init_app(app)
     login_manager.login_view = "login"
 
@@ -60,8 +70,10 @@ def create_app(settings_module):
         "MAIL_PORT": 465,
         "MAIL_USE_TLS": False,
         "MAIL_USE_SSL": True,
-        "MAIL_USERNAME": os.environ['MAIL_USERNAME'],
-        "MAIL_PASSWORD": os.environ['MAIL_PASSWORD'],
+#"MAIL_USERNAME": os.environ['MAIL_USERNAME'],
+        "MAIL_USERNAME": 'papeleria5613837@gmail.com',
+#"MAIL_PASSWORD": os.environ['MAIL_PASSWORD'],
+        "MAIL_PASSWORD": 'meneses1',
         "DONT_REPLY_FROM_EMAIL": '(jorge, papeleria5613837@gmail.com)',
         "ADMINS": "('papeleria5613837@gmail.com', )"
     }

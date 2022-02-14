@@ -7,8 +7,12 @@ from .models import Contacto
 from app.common.mail import send_email
 import os
 
+
 @public_bp.route("/")  #establecer ruta inicial
 def index():  #definir funcion
+
+#    print(app.config)
+
     return render_template('/index.html') #llamar al html
 
 

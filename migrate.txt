@@ -21,3 +21,10 @@ y por consola
 	flask db init
 	flask db migrate
 	flask db upgrade
+
+
+por consola para actualizar la tabla 
+
+- activar el entorno virtual.
+- flask db migrate -m "añadir imagen al modelo post "
+
