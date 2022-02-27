@@ -13,89 +13,101 @@
 <body>
     <section>
 
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class=flashe>
+            <ul class=flashes>
+                {% for message in messages %}
+                    <li >{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
 
-        <form class= "formulario" name= form  action="/contact" method="POST" novalidate>
-            {{form.hidden_tag()}}
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <div class=flashe>
-                <ul class=flashes>
-                   {% for message in messages %}
-                        <li >{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            {% endwith %}
-    
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well well-sm">
-                            <form class="form-horizontal" method="post">
-                                {{form.hidden_tag()}}
-                                <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <form class= "formulario" name= form  action="" method="POST" novalidate>
+                            {{form.hidden_tag()}}
+                            <fieldset>
+                                <div class="col-md-12">
+                                    <legend class="text-center header">Contactanos</legend>
+                                </div>
+                                <div class="form-group">
+                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                    {{form.nombre.label(class= "label")}}
                                     <div class="col-md-12">
-                                        <legend class="text-center header">Contactanos</legend>
+                                        {{form.nombre(class= "form-control", id="fname", autocomplete="off")}}
+                                            {% for error in form.nombre.errors %}
+                                                <span style="color:red;">{{ error }}<br></span>
+                                            {% endfor %}
                                     </div>
-                                    <div class="form-group">
-                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                                        {{form.nombre.label(class= "label")}}
-                                        <div class="col-md-12">
-                                            {{form.nombre(class= "form-control", id="fname", autocomplete="off")}}
-                                        </div>
+                                </div>
+        
+                                <div class="form-group">
+                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                                    {{form.correo.label(class= "label")}}
+                                    <div class="col-md-12">
+                                        {{form.correo(class= "form-control", id="email", autocomplete="off")}}
+                                            {% for error in form.correo.errors %}
+                                                <span style="color:red;">{{ error }}<br></span>
+                                            {% endfor %}
+
                                     </div>
-            
-                                    <div class="form-group">
-                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
-                                        {{form.correo.label(class= "label")}}
-                                        <div class="col-md-12">
-                                            {{form.correo(class= "form-control", id="email", autocomplete="off")}}
-                                        </div>
+                                </div>
+        
+                                <div class="form-group">
+                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                                    {{form.telefono.label(class= "label")}}
+                                    <div class="col-md-12">
+                                        {{form.telefono(class= "form-control", id="phone", autocomplete="off")}}
+                                            {% for error in form.telefono.errors %}
+                                                <span style="color:red;">{{ error }}<br></span>
+                                            {% endfor %}
+
                                     </div>
-            
-                                    <div class="form-group">
-                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-                                        {{form.telefono.label(class= "label")}}
-                                        <div class="col-md-12">
-                                            {{form.telefono(class= "form-control", id="phone", autocomplete="off")}}
-                    
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-bookmark-o bigicon" aria-hidden="true"></i></span>
+                                    {{form.asunto.label(class= "label")}}
+                                    <div class="col-md-12">
+                                        {{form.asunto(class= "form-control", id="asunto", autocomplete="off")}}
+                                            {% for error in form.asunto.errors %}
+                                                <span style="color:red;">{{ error }}<br></span>
+                                            {% endfor %}
+
                                     </div>
-                                    <div class="form-group">
-                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-bookmark-o bigicon" aria-hidden="true"></i></span>
-                                        {{form.asunto.label(class= "label")}}
-                                        <div class="col-md-12">
-                                            {{form.asunto(class= "form-control", id="asunto", autocomplete="off")}}
-                                        </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="line_titulo">
+                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
+                                        {{form.mensaje.label(class= "label")}}
                                     </div>
-                                    
-                                    <div class="form-group">
-                                        <div class="line_titulo">
-                                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
-                                            {{form.mensaje.label(class= "label")}}
-                                        </div>
-                                        <div class="col-md-12">
-                                            {{form.mensaje(class= "form-control", id="message", rows="7", autocomplete="off")}}
-                                        </div>
+                                    <div class="col-md-12">
+                                        {{form.mensaje(class= "form-control", id="message", rows="7", autocomplete="off")}}
+                                            {% for error in form.mensaje.errors %}
+                                                <span style="color:red;">{{ error }}<br></span>
+                                            {% endfor %}
+
                                     </div>
-            
-                                    <div class="form-group">
-                                        <div class="col-md-12 text-center">
-                                            <button type="submit" class="btn btn-principal btn-lg">Enviar</button>
-                                        </div>
+                                </div>
+        
+                                <div class="form-group">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn btn-principal btn-lg">Enviar</button>
                                     </div>
-                                </fieldset>
-                            </form>
-                        </div>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
 
-        </form>
-
-
-
+        
     </section>
 </body>
 </html>

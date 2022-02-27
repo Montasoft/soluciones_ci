@@ -21,29 +21,19 @@
 
               
                 <p class= "nota">Por favor incluya la información a mostrar en el nuevo post</p>
-
-                {% with messages = get_flashed_messages() %}
-                  {% if messages %}
-                  <div class=flashe>
-                    <ul class=flashes>
-                      {% for message in messages %}
-                        {{message}}
-                      {% endfor %}
-                    </ul>
-                  </div>
-                  {% endif %}
-                {% endwith %}                 
         
-              <div>
-                {{form.title(class= "caja", size=30)}}
+              <div class =  form-group>
+                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                 {{form.title.label(size= 20, class= "label_")}}
+                {{form.title(class= "form-control", id="title", autocomplete="off")}}                
                 {% for error in form.title.errors %}
                   <span style="color:red;">{{ error }}<br></span>
                 {% endfor %}
               </div>
               <div>
-                {{form.content(class= "caja", size=30)}}
+                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-handshake-o"></i></span>
                 {{form.content.label(class= "label_", size=30)}}
+                {{form.content(class= "form-control", rows= 5)}}
                 {% for error in form.content.errors %}
                   <span style="color: red;">{{ error }}<br></span>
                 {% endfor %}
@@ -51,7 +41,7 @@
 
               <div>
                 {{ form.post_image.label }}
-                {{ form.post_image }}<br>
+                {{ form.post_image (class= "form-control", type="file")}}<br>
                 {% for error in form.post_image.errors %}
                 <span style="color: red;">{{ error }}</span>
                 {% endfor %}
@@ -60,15 +50,6 @@
               <div>
                 {{form.submit(class= "btn")}}
                 
-                {% with messages = get_flashed_messages() %}
-                  {% if messages %}
-                    <ul class=flashes>
-                    {% for message in messages %}
-                      <li>{{ message }}</li>
-                    {% endfor %}
-                    </ul>
-                  {% endif %}
-                {% endwith %}
               </div>
               <!-- <button>Registrarse</button> -->
             </form>

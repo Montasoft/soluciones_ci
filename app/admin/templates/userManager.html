@@ -1,0 +1,64 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='userManager.js')}}"></script>
+
+{% extends 'baseLogin.html' %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<body>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  
+  
+  {% block contenido %}    
+
+    <div class="container">
+      <div class="frontbox">
+        <div class="login">
+          <div class="inputbox">
+            <form class= "formulario" name=form method="POST" action="" enctype="multipart/form-data" novalidate>
+              <button class="volver" id="switch1"><a href="{{url_for('admin.login')}}" style="color: #000000;">Página de inicio</a></button>
+                <h1 class="Titulo">Control de Usuarios</h1>
+
+                <p class= "nota">A continuación se listan los usuarios registrados en el sistema.</p>
+        
+              <div class="table-responsive">
+                <table id="tabla_userManager" class="table">
+                  <thead>
+                    <tr>
+                      <th class= "id">id</th>
+                      <th class= "nickname">nickname</th>
+                      <th class= "name">nombre</th>
+                      <th class= "email">email</th>
+                      <th class= "is_admin">is_admin</th>                
+                      <th class= "is_active">is_active</th>                
+                      <th class= "Editar">editar</th>                
+                    </tr>
+                  </thead>
+                  <tbody id=table-body>
+                        
+                  </tbody>
+                </table>
+              </div> 
+             
+              <!-- <button>Registrarse</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" language="javascript" src="{{url_for('static',filename='login.js')}}"></script>
+
+  {% for user in users %}
+  <li><a href="">{{ user.nickname }}</a></li>
+  <li><a href="">{{ user.name }}</a></li>
+  <li><a href="">{{ user.email }}</a></li>
+  <li><a href="">{{ user.is_admin() }}</a></li>
+  <li><a href="">{{ user.is_active() }}</a></li>
+
+
+  {% endfor %}
+
+
+  {% endblock %}
+</html>

@@ -9,3 +9,5 @@ SECRET_KEY =secrets.token_hex(28)
 
 SQLALCHEMY_DATABASE_URI= 'mysql://root:@localhost/sci_db'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+DEL_LOCAL= 'DEL dev'

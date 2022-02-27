@@ -7,6 +7,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy import Column, Integer, String, Float, DateTime
 from sqlalchemy.orm import synonym, sessionmaker
+from sqlalchemy.sql import func
 
 from app import db
 
@@ -20,7 +21,9 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     is_active= db.Column(db.Boolean, default=False)
-    fechaCre4 = db.Column(db.DateTime(TIMESTAMP))
+    #fechaCre4 = db.Column(db.DateTime(default=datetime.datetime.utcnow))
+    time_created = Column(DateTime(timezone=True), server_default=func.now())
+    time_updated = Column(DateTime(timezone=True), onupdate=func.now())
     nickname = db.Column(db.String(20), nullable=False)
     
 
@@ -38,6 +41,21 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
+
+    def is_admin(self):
+        return self.is_admin
+        
     def save(self):
         if not self.id:
             db.session.add(self)
@@ -55,8 +73,23 @@ class User(db.Model, UserMixin):
     def get_by_nickname(nickname):
         return User.query.filter_by(nickname=nickname).first()
 
+    @staticmethod
+    def get_all():
+        return User.query.all()
+
+    # probar par cerrar conexion
+    print("ANNNNNNNNNNNNNTES DE CERRAR SESSION.")
+# probar par cerrar conexion
+    def shutdown_session(exception=None):
+        print("llegando a Cerrar session.")
+        db.session.remove()
+        db.disponse()
+      
+
 Session = sessionmaker()
 session = Session
+
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -64,7 +97,9 @@ class Post(db.Model):
     title = db.Column(db.String(256), nullable=False)
     title_slug = db.Column(db.String(256), unique=True, nullable=False)
     content = db.Column(db.Text)
-    created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    #created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    time_created = Column(DateTime(timezone=True), server_default=func.now())
+    time_updated = Column(DateTime(timezone=True), onupdate=func.now())
     archivo = db.Column(db.String(256))
     '''
     comments = db.relationship('Comment', backref='post', lazy=True, cascade='all, delete-orphan',

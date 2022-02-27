@@ -14,6 +14,16 @@ class SignupForm(FlaskForm):
     registro = SubmitField('Registrar')
 
 
+class userManager(FlaskForm):
+    nickname = StringField('NickName', validators=[DataRequired(), Length(min=5, max=20)])
+    name = StringField('Nombre', validators=[DataRequired(), Length(max=80)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    is_admin = BooleanField('Administrador')
+    is_Active = BooleanField('Activo')
+    submit = SubmitField('confirmar')
+
+
+
 class LoginForm(FlaskForm):
     usuario = StringField('Ingrese su Nickname o correo electrónico', validators=[DataRequired(), Length(max=150)])
     password = PasswordField('Password', validators=[DataRequired()])

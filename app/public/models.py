@@ -1,3 +1,4 @@
+import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import url_for
@@ -15,9 +16,10 @@ class Contacto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(256), nullable=False)
     correo = db.Column(db.String(256), nullable=False)
-    telefono = db.Column(db.Integer, nullable=False)
+    telefono = db.Column(db.String(30), nullable=False)
     asunto = db.Column(db.String(256), nullable=False)
     mensaje = db.Column(db.Text)
+    created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __init__(self, nombre, correo, telefono, asunto, mensaje):
         self.nombre = nombre
